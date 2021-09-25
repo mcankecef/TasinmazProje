@@ -1,0 +1,21 @@
+.search-input{
+  color: #563d7c;
+  height: 55px;
+  border-radius: 1px;
+}
+.search-button{
+  border-radius:0px ;
+}
+.tr-font{
+  font-size: large;
+}
+.pagination{
+  color: #563d7c;
+}
+.table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+  background:rgba(108, 75, 155,0.6);
+  color: white;
+}
+.search-change:link{
+  background-color: #563d7c;
+}

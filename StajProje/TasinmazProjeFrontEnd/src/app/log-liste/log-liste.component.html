@@ -1,0 +1,62 @@
+<app-navbar></app-navbar>
+<div class="m-5 mt-3" style="margin-left: 40px">
+  <div class="row">
+    <div class="col-md-12">
+      <h2 class="p-2 shadow p-3 mb-4  bg-white rounded"  style="color:#563d7c;" >Log Liste
+        <button style="display: flex;float: right;border-radius: 2px; background-color: #563d7c;"
+        class="btn btn-primary text-white"><a style="cursor: pointer;" (click)="exportexcel()">
+          <svg xmlns="http://www.w3.org/2000/svg"
+          width="30" height="18" fill="currentColor" class="bi bi-file-earmark-excel mb-1" viewBox="0 0 16 16">
+          <path d="M5.884 6.68a.5.5 0 1 0-.768.64L7.349 10l-2.233 2.68a.5.5 0 0 0 .768.64L8 10.781l2.116 2.54a.5.5 0 0 0 .768-.641L8.651 10l2.233-2.68a.5.5 0 0 0-.768-.64L8 9.219l-2.116-2.54z"/>
+          <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5v2z"/>
+        </svg>Excel Formatına Dönüştür</a></button>
+      </h2>
+      <div class="search-button input-group mb-2">
+        <button type="submit"  class="btn btn-dark btn-lg shadow search-button" (click)="filterLog(searchValue)">
+          <i class="fa fa-search"></i>
+        </button>
+        <input [(ngModel)]= "searchValue" class="search-change shadow search-input form-control" id="myInput"
+         type="text" placeholder="Aramak istediğiniz değeri yazınız.. "(keyup)="filterLog(searchValue)">
+      </div>
+      <table id="excel-table" class="table table-hover table-striped shadow p-3 mb-4 bg-white rounded">
+        <thead>
+          <tr class="tr-font color-tr font-weight-bold" style="color:#563d7c">
+            <th>Durum</th>
+            <th>İşlem Tipi</th>
+            <th>Açıklama</th>
+            <th>Tarih/Saat</th>
+            <th>Ip</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of log | paginate:{
+            itemsPerPage : pagination.pageSize,
+            currentPage:pagination.page,
+            totalItems : pagination.count
+          }; let i = index">
+            <th *ngIf="item.durum==true">Başarılı</th>
+            <th *ngIf="item.durum==false">Başarısız</th>
+            <th>{{ item.islemTip }}</th>
+            <th>{{ item.aciklama }}</th>
+            <th>{{ item.tarihSaat }}</th>
+            <th>{{ item.ip }}</th>
+          </tr>
+        </tbody>
+      </table>
+      <div class="row">
+        <div class="col-md-10 p-2 text-center" >
+          <pagination-controls  class="" responsive="true" previousLabel="Once" nextLabel="Sonra" (pageChange)="onPageChange($event)">
+          </pagination-controls>
+        </div>
+        <!-- <div class="col-md-2" style="color: #563d7c;">
+          Sayfa İçerik:
+          <select (change)="onPageSizeChange($event)">
+            <option *ngFor="let size of pagination.pageSizes" [ngValue]="size">
+              {{ size }}
+          </option>
+          </select>
+        </div> -->
+    </div>
+  </div>
+</div>
+
